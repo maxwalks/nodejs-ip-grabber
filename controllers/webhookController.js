@@ -21,7 +21,6 @@ const embed = new MessageBuilder()
       "Made by maxwalks",
       "https://cdn.discordapp.com/attachments/1198679960076959825/1234152158899736717/logo.jpg?ex=662fb144&is=662e5fc4&hm=f87965035d55d0045c6fc480e3b0015f8c9c5d9cbb4bc9e4138e5ecf3405d1c4&"
     )
-    .setTimestamp();
-
+    .setTimestamp(); 
 
 module.exports = embed
