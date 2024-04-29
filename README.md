@@ -1,6 +1,7 @@
 # NodeJS Ip Grabber
-![image](https://github.com/maxwalks/nodejs-ip-grabber/assets/78441835/214e8130-bfea-4995-b8e4-f06e39cd4e1a)
-
+![image](https://github.com/maxwalks/nodejs-ip-grabber/assets/78441835/808b443c-9f57-4c1a-a38d-72258c1bec97)
+![image](https://github.com/maxwalks/nodejs-ip-grabber/assets/78441835/99d71b98-e9aa-491e-b99e-4a5ce16b3f84)
+![image](https://github.com/maxwalks/nodejs-ip-grabber/assets/78441835/73db7252-261f-4cbd-8b60-57882ac00bc8)
 
 ## Description
 ExpressJS app that requests the user's headers, where the originating ip address is located. This gets sent to a discord webhook with aditional information such as: country, region, timezone and city. The region and the city will not be accurate 90% of the time.
@@ -16,3 +17,5 @@ To install and run this project - install dependencies using npm and then start 
 $ npm install
 $ npm run dev
 ```
+## Credits
+Thanks to the [evilportals github](https://github.com/kleo/evilportals), i could include the google signup page. Please check it out.
