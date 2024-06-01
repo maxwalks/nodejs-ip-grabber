@@ -22,7 +22,8 @@
     "express-ejs-layouts": "^2.5.1",
     "express-rate-limit": "^7.2.0",
     "geoip-lite": "^1.4.10",
-    "jsonwebtoken": "^9.0.2"
+    "jsonwebtoken": "^9.0.2",
+    "prisma": "^5.14.0"
   },
   "devDependencies": {
     "nodemon": "^3.1.0"
