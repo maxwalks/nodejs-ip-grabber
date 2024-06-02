@@ -18,7 +18,7 @@ router.get("/", (req, res, next) => {
       const geo = geoip.lookup(SplitIp) || { country: null, region: null, timezone: null, city: null };
       const headers = req.headers["user-agent"]
       if (headers == "Mozilla/5.0+(compatible; UptimeRobot/2.0; http://www.uptimerobot.com/)") {
-        console.log("uptimerobot detected, skipping")
+        console.log(`uptimerobot detected, skipping ${headers}`)
       } else {
         const embed = new MessageBuilder()
         .setTitle("NodeJS ip logger")
