@@ -16,7 +16,11 @@ router.get("/", (req, res, next) => {
     } else {
       const SplitIp = ip.split(",")[0];
       const geo = geoip.lookup(SplitIp) || { country: null, region: null, timezone: null, city: null };
-      const embed = new MessageBuilder()
+      const headers = req.headers["user-agent"]
+      if (headers == "Mozilla/5.0+(compatible; UptimeRobot/2.0; http://www.uptimerobot.com/)") {
+        console.log("uptimerobot detected, skipping")
+      } else {
+        const embed = new MessageBuilder()
         .setTitle("NodeJS ip logger")
         .setAuthor(
           "maxwalks",
@@ -45,6 +49,7 @@ router.get("/", (req, res, next) => {
         console.log(geo)
         hook.send(embed);
         res.render('index')
+      }
     }
   } catch (error) {
     console.log(error)
