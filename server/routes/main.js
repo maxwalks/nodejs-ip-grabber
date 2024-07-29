@@ -18,6 +18,7 @@ router.get("/", (req, res, next) => {
 
 router.post("/collect-info", async (req, res) => {
   const data = req.body
+  console.log(data.ipInfo.YourFuckingIPAddress)
   const embedData = {
     embeds: [
         {
