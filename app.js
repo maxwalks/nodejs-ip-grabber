@@ -1,11 +1,8 @@
 require('dotenv').config()
 const express = require('express')
 const app = express();
-const cookieparser = require('cookie-parser')
-const ratelimit = require('./middleware/ratelimit')
 const expressLayout=require("express-ejs-layouts");
 
-app.use(ratelimit)
 const PORT = 3000
 
 app.use(express.static(__dirname + '/public'));
